@@ -1,0 +1,3588 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Vonage</name>
+    </assembly>
+    <members>
+        <member name="P:Vonage.Accounts.AccountSettingsRequest.MoCallBackUrl">
+            <summary>
+            The URL where Vonage will send a webhook when an SMS is received to a Vonage number that does not have SMS
+            handling configured. Send an empty string to unset this value.
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.AccountSettingsRequest.DrCallBackUrl">
+            <summary>
+            The URL where Vonage will send a webhook when an delivery receipt is received without a specific callback
+            URL configured. Send an empty string to unset this value.
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.AccountSettingsResult.MoCallbackUrl">
+            <summary>
+            The current or updated inbound message URI
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.AccountSettingsResult.DrCallbackurl">
+            <summary>
+            The current or updated delivery receipt URI
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.AccountSettingsResult.MaxOutboundRequest">
+            <summary>
+            The maximum number of outbound messages per second.
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.AccountSettingsResult.MaxInboundRequest">
+            <summary>
+            The maximum number of inbound messages per second.
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.AccountSettingsResult.MaxCallsPerSecond">
+            <summary>
+            The maximum number of API calls per second.
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.Balance.Value">
+            <summary>
+            The balance of the account, in EUR
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.Balance.AutoReload">
+            <summary>
+            Whether the account has auto-reloading enabled
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.CreateSecretRequest.Secret">
+            <summary>
+            the new secret to be created
+            The new secret must follow these rules:
+              minimum 8 characters
+              maximum 25 characters
+              minimum 1 lower case character
+              minimum 1 upper case character
+              minimum 1 digit
+            </summary>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.GetAccountBalanceAsync(Vonage.Request.Credentials)">
+            <summary>
+            Retrieve the current balance of your Vonage API account
+            </summary>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.TopUpAccountBalanceAsync(Vonage.Accounts.TopUpRequest,Vonage.Request.Credentials)">
+            <summary>
+            You can top up your account using this API when you have enabled auto-reload in the dashboard. 
+            The amount added by the top-up operation will be the same amount as was added in the payment 
+            when auto-reload was enabled. Your account balance is checked every 5-10 minutes and if it falls 
+            below the threshold and auto-reload is enabled, then it will be topped up automatically. Use this 
+            endpoint if you need to top up at times when your credit may be exhausted more quickly than the auto-reload may occur.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.ChangeAccountSettingsAsync(Vonage.Accounts.AccountSettingsRequest,Vonage.Request.Credentials)">
+            <summary>
+            Update the default callback URLs (where the webhooks are sent to) associated with your account: 
+            * Callback URL for incoming SMS messages * Callback URL for delivery receipts        
+            Note: that the URLs you provide must be valid and active. Vonage will check that they return a 200 OK response before the setting is saved
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.RetrieveApiSecretsAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            Many of Vonage's APIs are accessed using an API key and secret. It is recommended that you change or "rotate" 
+            your secrets from time to time for security purposes. This section provides the API interface for achieving this. 
+            Note: to work on secrets for your secondary accounts, you may authenticate with your primary 
+            credentials and supply the secondary API keys as URL parameters to these API endpoints.
+            </summary>
+            <param name="apiKey"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.CreateApiSecretAsync(Vonage.Accounts.CreateSecretRequest,System.String,Vonage.Request.Credentials)">
+            <summary>
+            Createse an API Secret
+            </summary>
+            <param name="request"></param>
+            <param name="apiKey">The Api Key to create a secret for</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.RetrieveApiSecretAsync(System.String,System.String,Vonage.Request.Credentials)">
+            <summary>
+            retrieves info about an api secret at the given id
+            </summary>
+            <param name="secretId">the id of the secret</param>
+            <param name="apiKey">Api Key the secret is for</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.RevokeApiSecretAsync(System.String,System.String,Vonage.Request.Credentials)">
+            <summary>
+            Deletes an Api Secret
+            </summary>
+            <param name="secretId">the id of the secret to be deleted</param>
+            <param name="apiKey">the api key the secret is for</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.GetAccountBalance(Vonage.Request.Credentials)">
+            <summary>
+            Retrieve the current balance of your Vonage API account
+            </summary>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.TopUpAccountBalance(Vonage.Accounts.TopUpRequest,Vonage.Request.Credentials)">
+            <summary>
+            You can top up your account using this API when you have enabled auto-reload in the dashboard. 
+            The amount added by the top-up operation will be the same amount as was added in the payment 
+            when auto-reload was enabled. Your account balance is checked every 5-10 minutes and if it falls 
+            below the threshold and auto-reload is enabled, then it will be topped up automatically. Use this 
+            endpoint if you need to top up at times when your credit may be exhausted more quickly than the auto-reload may occur.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.ChangeAccountSettings(Vonage.Accounts.AccountSettingsRequest,Vonage.Request.Credentials)">
+            <summary>
+            Update the default callback URLs (where the webhooks are sent to) associated with your account: 
+            * Callback URL for incoming SMS messages * Callback URL for delivery receipts        
+            Note: that the URLs you provide must be valid and active. Vonage will check that they return a 200 OK response before the setting is saved
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.RetrieveApiSecrets(System.String,Vonage.Request.Credentials)">
+            <summary>
+            Many of Vonage's APIs are accessed using an API key and secret. It is recommended that you change or "rotate" 
+            your secrets from time to time for security purposes. This section provides the API interface for achieving this. 
+            Note: to work on secrets for your secondary accounts, you may authenticate with your primary 
+            credentials and supply the secondary API keys as URL parameters to these API endpoints.
+            </summary>
+            <param name="apiKey"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.CreateApiSecret(Vonage.Accounts.CreateSecretRequest,System.String,Vonage.Request.Credentials)">
+            <summary>
+            Createse an API Secret
+            </summary>
+            <param name="request"></param>
+            <param name="apiKey">The Api Key to create a secret for</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.RetrieveApiSecret(System.String,System.String,Vonage.Request.Credentials)">
+            <summary>
+            retrieves info about an api secret at the given id
+            </summary>
+            <param name="secretId">the id of the secret</param>
+            <param name="apiKey">Api Key the secret is for</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Accounts.IAccountClient.RevokeApiSecret(System.String,System.String,Vonage.Request.Credentials)">
+            <summary>
+            Deletes an Api Secret
+            </summary>
+            <param name="secretId">the id of the secret to be deleted</param>
+            <param name="apiKey">the api key the secret is for</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Accounts.Secret.Links">
+            <summary>
+            the reference link for the secret
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.Secret.Id">
+            <summary>
+            the id of the secret
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.Secret.CreatedAt">
+            <summary>
+            the creation time of the secret
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.SecretsRequestResult.Links">
+            <summary>
+            reference links for the secrets
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.SecretsRequestResult.Embedded">
+            <summary>
+            the secrets
+            </summary>
+        </member>
+        <member name="P:Vonage.Accounts.TopUpRequest.Trx">
+            <summary>
+            The transaction reference of the transaction when balance was added and auto-reload was enabled on your account.
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.Application.Id">
+            <summary>
+            The application's ID
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.Application.Name">
+            <summary>
+            Friendly identifier for your application. This is not unique
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.Application.Capabilities">
+            <summary>
+            Configuration for the products available in this application
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.Application.Keys">
+            <summary>
+            The keys for your application
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.ApplicationCapabilities.Voice">
+            <summary>
+            Voice application webhook config
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.ApplicationCapabilities.Rtc">
+            <summary>
+            RTC / Client SDK application webhook config
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.ApplicationCapabilities.Vbc">
+            <summary>
+            Specify vbc capability to enable zero-rated calls for VBC number programmability service applications. This must be an empty object.
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.ApplicationCapabilities.Messages">
+            <summary>
+            Messages and Dispatch application webhook config
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.CreateApplicationRequest.Name">
+            <summary>
+            Application Name
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.CreateApplicationRequest.Capabilities">
+            <summary>
+            Your application can use multiple products. This contains the configuration for each product. 
+            This replaces the application type from version 1 of the Application API.
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.CreateApplicationRequest.Keys">
+            <summary>
+            The keys for the application
+            </summary>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.CreateApplicaitonAsync(Vonage.Applications.CreateApplicationRequest,Vonage.Request.Credentials)">
+            <summary>
+            Application Name
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.ListApplicationsAsync(Vonage.Applications.ListApplicationsRequest,Vonage.Request.Credentials)">
+            <summary>
+            List applications
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.GetApplicationAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            Retrieves information about an application
+            </summary>
+            <param name="id">Id of the application to be retrieved</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.UpdateApplicationAsync(System.String,Vonage.Applications.CreateApplicationRequest,Vonage.Request.Credentials)">
+            <summary>
+            Updates an Application
+            </summary>
+            <param name="id">Id of the application to be updated</param>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.DeleteApplicationAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            Deletes an application: Cannot be undone
+            </summary>
+            <param name="id">Id of the application to be deleted</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.CreateApplicaiton(Vonage.Applications.CreateApplicationRequest,Vonage.Request.Credentials)">
+            <summary>
+            Application Name
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.ListApplications(Vonage.Applications.ListApplicationsRequest,Vonage.Request.Credentials)">
+            <summary>
+            List applications
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.GetApplication(System.String,Vonage.Request.Credentials)">
+            <summary>
+            Retrieves information about an application
+            </summary>
+            <param name="id">Id of the application to be retrieved</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.UpdateApplication(System.String,Vonage.Applications.CreateApplicationRequest,Vonage.Request.Credentials)">
+            <summary>
+            Updates an Application
+            </summary>
+            <param name="id">Id of the application to be updated</param>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Applications.IApplicationClient.DeleteApplication(System.String,Vonage.Request.Credentials)">
+            <summary>
+            Deletes an application: Cannot be undone
+            </summary>
+            <param name="id">Id of the application to be deleted</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Applications.ListApplicationsRequest.PageSize">
+            <summary>
+            Number of records to retrieve per page
+            </summary>
+        </member>
+        <member name="P:Vonage.Applications.ListApplicationsRequest.Page">
+            <summary>
+            the page to retrieve
+            </summary>
+        </member>
+        <member name="P:Vonage.Conversions.ConversionRequest.MessageId">
+            <summary>
+            The ID you receive in the response to a request. * From the Verify API - use the event_id in the response to Verify Check. 
+            * From the SMS API - use the message-id * From the Text-To-Speech API - use the call-id * From the Text-To-Speech-Prompt API - use the call-id
+            </summary>
+        </member>
+        <member name="P:Vonage.Conversions.ConversionRequest.Delivered">
+            <summary>
+            Set to true if your user replied to the message you sent. Otherwise, set to false. Note: for curl, use 0 and 1.
+            </summary>
+        </member>
+        <member name="P:Vonage.Conversions.ConversionRequest.TimeStamp">
+            <summary>
+            When the user completed your call-to-action (e.g. visited your website, installed your app) 
+            in UTC±00:00 format: yyyy-MM-dd HH:mm:ss. If you do not set this parameter, Vonage uses the time it receives this request.
+            </summary>
+        </member>
+        <member name="M:Vonage.Conversions.IConversionClient.SmsConversionAsync(Vonage.Conversions.ConversionRequest,Vonage.Request.Credentials)">
+            <summary>
+            Send a Conversion API request with information about the SMS message identified by message-id. 
+            Vonage uses your conversion data and internal information about message-id to help improve our routing of messages in the future.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Conversions.IConversionClient.VoiceConversionAsync(Vonage.Conversions.ConversionRequest,Vonage.Request.Credentials)">
+            <summary>
+            Send a Conversion API request with information about the Call or Text-To-Speech identified by message-id. 
+            Vonage uses your conversion data and internal information about message-id to help improve our routing of messages in the future.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Conversions.IConversionClient.SmsConversion(Vonage.Conversions.ConversionRequest,Vonage.Request.Credentials)">
+            <summary>
+            Send a Conversion API request with information about the SMS message identified by message-id. 
+            Vonage uses your conversion data and internal information about message-id to help improve our routing of messages in the future.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Conversions.IConversionClient.VoiceConversion(Vonage.Conversions.ConversionRequest,Vonage.Request.Credentials)">
+            <summary>
+            Send a Conversion API request with information about the Call or Text-To-Speech identified by message-id. 
+            Vonage uses your conversion data and internal information about message-id to help improve our routing of messages in the future.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Messages.Attachment.Url">
+            <summary>
+            The URL of the attachment.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.CaptionedAttachment.Url">
+            <summary>
+            The URL of the attachment.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.CaptionedAttachment.Caption">
+            <summary>
+            Additional text to accompany the attachment.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.MessageRequestBase.Channel">
+            <summary>
+            The channel to send to.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.MessageRequestBase.MessageType">
+            <summary>
+            The type of message to send.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.MessageRequestBase.To">
+            <summary>
+            The phone number of the message recipient in the E.164 format. Don't use a leading + or 00 when entering a phone number,
+            start with the country code, for example, 447700900000.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.MessageRequestBase.From">
+            <summary>
+            The phone number of the message sender in the E.164 format. Don't use a leading + or 00 when entering a phone number,
+            start with the country code, for example, 447700900000. For SMS in certain localities alpha-numeric sender id's will
+            work as well.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.MessageRequestBase.ClientRef">
+            <summary>
+            Client reference of up to 40 characters. The reference will be present in every message status.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.Messenger.MessengerRequestData.Category">
+            <summary>
+            The use of different category tags enables the business to send messages for
+            different use cases. For Facebook Messenger they need to comply with their
+            Messaging Types policy. Vonage maps our category to their messaging_type.
+            If message_tag is used, then an additional tag for that type is mandatory.
+            By default Vonage sends the response category to Facebook Messenger.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.Messenger.MessengerRequestData.Tag">
+            <summary>
+            A tag describing the type and relevance of the 1:1 communication between your app and the
+            end user. A full list of available tags is available
+            <a href="https://developers.facebook.com/docs/messenger-platform/send-messages/message-tags">here</a>
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.Messenger.MessengerTextRequest.Text">
+            <summary>
+            The text of message to send; limited to 640 characters, including unicode.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.Viber.ViberImageRequest.Image">
+            <summary>
+            The URL of the image attachment.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.Viber.ViberRequestData.Category">
+            <summary>
+            The use of different category tags enables the business to send messages for
+            different use cases. For Viber Service Messages the first message sent from a
+            business to a user must be personal, informative and a targeted message - not promotional.
+            By default Vonage sends the transaction category to Viber Service Messages.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.Viber.ViberRequestData.TTL">
+            <summary>
+            Set the time-to-live of message to be delivered in seconds. i.e. if the
+            message is not delivered in 600 seconds then delete the message.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.Viber.ViberRequestData.Type">
+            <summary>
+            Viber-specific type definition. To use "template", please contact your
+            Vonage Account Manager to setup your templates.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.Viber.ViberTextRequest.Text">
+            <summary>
+            The text of message to send; limited to 640 characters, including unicode.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.MessageTemplate.Name">
+            <summary>
+            The name of the template. For WhatsApp use your WhatsApp namespace (available via Facebook Business Manager), followed by a colon : and the name of the template to use.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.MessageTemplate.Parameters">
+            <summary>
+            The parameters are an array of strings. The first value being {{1}} in the template.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.MessageWhatsApp.Policy">
+            <summary>
+            Policy for resolving what language template to use. Please note that WhatsApp deprecated the fallback policy in January of 2020,
+            all requests carrying a fallback policy will be rejected with a 400 error. As of right now the only valid choice is deterministic
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.MessageWhatsApp.Locale">
+            <summary>
+            The BCP 47 language of the template. Vonage will translate the BCP 47 format to the WhatsApp equivalent. For examples en-GB will be auto-translate to en_GB.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.WhatsAppAudioRequest.Audio">
+            <summary>
+            The audio attachment. Supports.aac, .m4a, .amr, .mp3 and.opus
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.WhatsAppCustomRequest.Custom">
+            <summary>
+            A custom payload, which is passed directly to WhatsApp for certain features such as
+            templates and interactive messages.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.WhatsAppFileRequest.File">
+            <summary>
+            The file attachment.
+            Supports supports a wide range of attachments including .zip, .csv and .pdf.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.WhatsAppImageRequest.Image">
+            <summary>
+            The image attachment. Supports .jpg, .jpeg, and .png.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.WhatsAppTextRequest.Text">
+            <summary>
+            The text of message to send; limited to 4096 characters, including unicode.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messages.WhatsApp.WhatsAppVideoRequest.Video">
+            <summary>
+            The video attachment.
+            Supports .mp4 and .3gpp. Note, only H.264 video codec and AAC audio codec is supported.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.Msisdn">
+            <summary>
+            The number the message was sent to. Numbers are specified in E.164 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.To">
+            <summary>
+            The SenderID you set in from in your request.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.NetworkCode">
+            <summary>
+            The Mobile Country Code Mobile Network Code (MCCMNC) of the carrier this phone number is registered with.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.MessageId">
+            <summary>
+            The Vonage ID for this message.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.Price">
+            <summary>
+            The cost of the message
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.StringStatus">
+            <summary>
+            A code that explains where the message is in the delivery process.
+            Will be one of: delivered, expired, failed, rejected, accepted, buffered or unknown
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.Status">
+            <summary>
+            A code that explains where the message is in the delivery process.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.Scts">
+            <summary>
+            When the DLR was received from the carrier in the following format YYMMDDHHMM. For example, 2001011400 is at 2020-01-01 14:00
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.ErrorCode">
+            <summary>
+            The status of the request. Will be a non 0 value if there has been an error, or if the status is unknown. 
+            See the Delivery Receipt documentation for more details: https://developer.nexmo.com/messaging/sms/guides/delivery-receipts#dlr-error-codes
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.MessageTimestamp">
+            <summary>
+            The time when Vonage started to push this Delivery Receipt to your webhook endpoint.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.ApiKey">
+            <summary>
+            The API key that sent the SMS. This is useful when multiple accounts are sending webhooks to the same endpoint.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.Timestamp">
+            <summary>
+            A timestamp in Unix (seconds since the epoch) format. Only included if you have signatures enabled
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.Nonce">
+            <summary>
+            A random string to be used when calculating the signature. Only included if you have signatures enabled
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.Sig">
+            <summary>
+            The signature to enable verification of the source of this webhook. 
+            Please see the developer documentation for validating signatures for more information, 
+            or use one of our published SDKs. Only included if you have signatures enabled
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.DeliveryReceipt.ClientRef">
+            <summary>
+            If the client-ref is set when the SMS is sent, it will be included in the delivery receipt
+            </summary>
+        </member>
+        <member name="M:Vonage.Messaging.ISmsClient.SendAnSmsAsync(Vonage.Messaging.SendSmsRequest,Vonage.Request.Credentials)">
+            <summary>
+            Send an outbound SMS from your Vonage account
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Messaging.ISmsClient.SendAnSms(Vonage.Messaging.SendSmsRequest,Vonage.Request.Credentials)">
+            <summary>
+            Send an outbound SMS from your Vonage account
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Messaging.ISmsClient.SendAnSmsAsync(System.String,System.String,System.String,Vonage.Messaging.SmsType,Vonage.Request.Credentials)">
+            <summary>
+            Send an outbound SMS from your Vonage account
+            </summary>
+            <param name="from">The name or number the message should be sent from.</param>
+            <param name="to">The number that the message should be sent to. Numbers are specified in E.164 format.</param>
+            <param name="text">The body of the message being sent.</param>
+            <param name="type">The format of the message body.</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Messaging.ISmsClient.SendAnSms(System.String,System.String,System.String,Vonage.Messaging.SmsType,Vonage.Request.Credentials)">
+            <summary>
+            Send an outbound SMS from your Vonage account
+            </summary>
+            <param name="from">The name or number the message should be sent from.</param>
+            <param name="to">The number that the message should be sent to. Numbers are specified in E.164 format.</param>
+            <param name="text">The body of the message being sent.</param>
+            <param name="type">The format of the message body.</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.From">
+            <summary>
+            The name or number the message should be sent from. 
+            Alphanumeric senderID's are not supported in all countries, 
+            see Global Messaging for more details. If alphanumeric, 
+            spaces will be ignored. Numbers are specified in E.164 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.To">
+            <summary>
+            The number that the message should be sent to. Numbers are specified in E.164 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Text">
+            <summary>
+            The body of the message being sent. If your message contains characters 
+            that can be encoded according to the GSM Standard and Extended tables then you can set the type to text. 
+            If your message contains characters outside this range, then you will need to set the type to unicode.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Ttl">
+            <summary>
+            The duration in milliseconds the delivery of an SMS will be attempted.
+            By default Vonage attempt delivery for 72 hours, 
+            however the maximum effective value depends on the operator and is typically 24 - 48 hours.
+            We recommend this value should be kept at its default or at least 30 minutes.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.StatusReportReq">
+            <summary>
+            Boolean indicating if you like to receive a Delivery Receipt.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Callback">
+            <summary>
+            The webhook endpoint the delivery receipt for this sms is sent to. 
+            This parameter overrides the webhook endpoint you set in Dashboard.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.MessageClass">
+            <summary>
+             The Data Coding Scheme value of the message
+             Must be one of: 0, 1, 2 or 3
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Type">
+            <summary>
+            The format of the message body         
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Vcard">
+            <summary>
+            A business card in vCard format. Depends on type parameter having the value vcard.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Vcal">
+            <summary>
+            A calendar event in vCal format. Depends on type parameter having the value vcal.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Body">
+            <summary>
+            Hex encoded binary data. Depends on type parameter having the value binary.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Udh">
+            <summary>
+            Your custom Hex encoded User Data Header. Depends on type parameter having the value binary.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.ProtocolId">
+            <summary>
+            The value of the protocol identifier to use. Ensure that the value is aligned with udh.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Title">
+            <summary>
+            The title for a wappush SMS. Depends on type parameter having the value wappush.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Url">
+            <summary>
+            The URL of your website. Depends on type parameter having the value wappush.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.Validity">
+            <summary>
+            The availability for an SMS in milliseconds. Depends on type parameter having the value wappush.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.ClientRef">
+            <summary>
+            You can optionally include your own reference of up to 40 characters.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.AccountRef">
+            <summary>
+            An optional string used to identify separate accounts using the SMS endpoint for billing purposes. 
+            To use this feature, please email support@nexmo.com
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.EntityId">
+            <summary>
+            A string parameter that satisfies regulatory requirements when sending an SMS to specific countries.
+            For more information please refer to the <see href="https://help.nexmo.com/hc/en-us/articles/115011781468">Country-Specific Outbound SMS Features</see>
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsRequest.ContentId">
+            <summary>
+            A string parameter that satisfies regulatory requirements when sending an SMS to specific countries.
+            For more information please refer to the <see href="https://help.nexmo.com/hc/en-us/articles/115011781468">Country-Specific Outbound SMS Features</see>
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SendSmsResponse.MessageCount">
+            <summary>
+            The amount of messages in the request
+            </summary>
+        </member>
+        <member name="M:Vonage.Messaging.SmsClient.SendAnSmsAsync(Vonage.Messaging.SendSmsRequest,Vonage.Request.Credentials)">
+            <summary>
+            Send a SMS message.
+            </summary>
+            <param name="request">The SMS message request</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Messaging.VonageSmsResponseException">Thrown when the status of a message is non-zero or response is empty</exception>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Messaging.SmsResponseMessage.To">
+            <summary>
+            The number the message was sent to. Numbers are specified in E.164 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SmsResponseMessage.MessageId">
+            <summary>
+            The ID of the message
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SmsResponseMessage.ErrorText">
+            <summary>
+            The status of the message. See Troubleshooting Failed SMS.
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SmsResponseMessage.Status">
+            <summary>
+            The status of the message. See: https://developer.nexmo.com/messaging/sms/guides/troubleshooting-sms
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SmsResponseMessage.RemainingBalance">
+            <summary>
+            Your remaining balance
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SmsResponseMessage.MessagePrice">
+            <summary>
+            The cost of the message
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SmsResponseMessage.Network">
+            <summary>
+            The ID of the network of the recipient
+            </summary>
+        </member>
+        <member name="P:Vonage.Messaging.SmsResponseMessage.AccountRef">
+            <summary>
+            If a client-ref was included when sending the SMS, this field will be included and hold the value that was sent.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedInsightsAsynchronousResponse.Number">
+            <summary>
+            The number in your request
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedInsightsAsynchronousResponse.RemainingBalance">
+            <summary>
+            Your account balance in EUR after this request. Not returned with Number Insight Advanced Async API.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedInsightsAsynchronousResponse.RequestPrice">
+            <summary>
+            If there is an internal lookup error, the refund_price will reflect the lookup price. 
+            If cnam is requested for a non-US number the refund_price will reflect the cnam price.
+            If both of these conditions occur, refund_price is the sum of the lookup price and cnam price.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedInsightsResponse.LookupOutcome">
+            <summary>
+            Shows if all information about a phone number has been returned.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedInsightsResponse.LookupOutcomeMessage">
+            <summary>
+            Shows if all information about a phone number has been returned.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedInsightsResponse.ValidNumber">
+            <summary>
+            Does number exist. unknown means the number could not be validated. 
+            valid means the number is valid. not_valid means the number is not valid. 
+            inferred_not_valid means that the number could not be determined as valid or invalid 
+            via an external system and the best guess is that the number is invalid. 
+            This is applicable to mobile numbers only.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedInsightsResponse.Reachable">
+            <summary>
+            Can you call number now. This is applicable to mobile numbers only.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedInsightsResponse.RealTimeData">
+            <summary>
+            Real time data about the number
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedNumberInsightAsynchronousRequest.Callback">
+            <summary>
+            The callback URL
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.AdvancedNumberInsightRequest.Ip">
+            <summary>
+            This parameter is deprecated as we are no longer able to retrieve reliable IP data globally from carriers.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicInsightResponse.StatusMessage">
+            <summary>
+            The status description of your request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicInsightResponse.InternationalFormatNumber">
+            <summary>
+            The number in your request in international format.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicInsightResponse.NationalFormatNumber">
+            <summary>
+            The number in your request in the format used by the country the number belongs to.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicInsightResponse.CountryCode">
+            <summary>
+            Two character country code for number. This is in ISO 3166-1 alpha-2 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicInsightResponse.CountryCodeIso3">
+            <summary>
+            Three character country code for number. This is in ISO 3166-1 alpha-3 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicInsightResponse.CountryName">
+            <summary>
+            The full name of the country that number is registered in.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicInsightResponse.CountryPrefix">
+            <summary>
+            The numeric prefix for the country that number is registered in.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicNumberInsightRequest.Number">
+            <summary>
+            A single phone number that you need insight about in national or international format.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.BasicNumberInsightRequest.Country">
+            <summary>
+            If a number does not have a country code or is uncertain, set the two-character country code. 
+            This code must be in ISO 3166-1 alpha-2 format and in upper case. For example, GB or US. 
+            If you set country and number is already in E.164 format, country must match the country code in number.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.CallerId.CallerType">
+            <summary>
+            The value will be business if the owner of a phone number is a business. 
+            If the owner is an individual the value will be consumer. 
+            The value will be unknown if this information is not available. 
+            This parameter is only present if cnam had a value of true within the request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.CallerId.CallerName">
+            <summary>
+            Full name of the person or business who owns the phone number. 
+            Unknown if this information is not available. 
+            This parameter is only present if cnam had a value of true within the request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.CallerId.FirstName">
+            <summary>
+            First name of the person who owns the phone number if the owner is an individual. 
+            This parameter is only present if cnam had a value of true within the request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.CallerId.LastName">
+            <summary>
+            Last name of the person who owns the phone number if the owner is an individual. 
+            This parameter is only present if cnam had a value of true within the request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.Carrier.NetworkCode">
+            <summary>
+            The https://en.wikipedia.org/wiki/Mobile_country_code for the carriernumber is associated with.
+            Unreal numbers are marked asunknown and the request is rejected altogether if the number is impossible according to the E.164 guidelines.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.Carrier.Name">
+            <summary>
+            The full name of the carrier that number is associated with.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.Carrier.Country">
+            <summary>
+            The country that number is associated with. This is in ISO 3166-1 alpha-2 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.Carrier.NetworkType">
+            <summary>
+            The type of network that number is associated with.
+            </summary>
+        </member>
+        <member name="M:Vonage.NumberInsights.INumberInsightClient.GetNumberInsightBasicAsync(Vonage.NumberInsights.BasicNumberInsightRequest,Vonage.Request.Credentials)">
+            <summary>
+            Provides basic number insight information about a number.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.NumberInsights.INumberInsightClient.GetNumberInsightStandardAsync(Vonage.NumberInsights.StandardNumberInsightRequest,Vonage.Request.Credentials)">
+            <summary>
+            Provides standard number insight information about a number.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.NumberInsights.INumberInsightClient.GetNumberInsightAdvancedAsync(Vonage.NumberInsights.AdvancedNumberInsightRequest,Vonage.Request.Credentials)">
+            <summary>
+            Provides advanced number insight information about a number synchronously, in the same way that the basic and standard endpoints do.
+            Vonage recommends accessing the Advanced API asynchronously
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.NumberInsights.INumberInsightClient.GetNumberInsightAsynchronousAsync(Vonage.NumberInsights.AdvancedNumberInsightAsynchronousRequest,Vonage.Request.Credentials)">
+            <summary>
+            Provides advanced number insight number information asynchronously using the URL specified in the callback parameter. 
+            Vonage recommends asynchronous use of the Number Insight Advanced API, to avoid timeouts.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.NumberInsights.INumberInsightClient.GetNumberInsightBasic(Vonage.NumberInsights.BasicNumberInsightRequest,Vonage.Request.Credentials)">
+            <summary>
+            Provides basic number insight information about a number.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.NumberInsights.INumberInsightClient.GetNumberInsightStandard(Vonage.NumberInsights.StandardNumberInsightRequest,Vonage.Request.Credentials)">
+            <summary>
+            Provides standard number insight information about a number.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.NumberInsights.INumberInsightClient.GetNumberInsightAdvanced(Vonage.NumberInsights.AdvancedNumberInsightRequest,Vonage.Request.Credentials)">
+            <summary>
+            Provides advanced number insight information about a number synchronously, in the same way that the basic and standard endpoints do.
+            Vonage recommends accessing the Advanced API asynchronously
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.NumberInsights.INumberInsightClient.GetNumberInsightAsynchronous(Vonage.NumberInsights.AdvancedNumberInsightAsynchronousRequest,Vonage.Request.Credentials)">
+            <summary>
+            Provides advanced number insight number information asynchronously using the URL specified in the callback parameter. 
+            Vonage recommends asynchronous use of the Number Insight Advanced API, to avoid timeouts.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.NumberInsights.NumberInsightResponseBase.Status">
+            <summary>
+            Status of the Number Insight Request
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.NumberInsightResponseBase.RequestId">
+            <summary>
+            The unique identifier for your request. This is a alphanumeric string up to 40 characters.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.RealTimeData.ActiveStatus">
+            <summary>
+            Whether the end-user's phone number is active within an operator's network.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.RealTimeData.HandsetStatus">
+            <summary>
+            Whether the end-user's handset is turned on or off.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.Roaming.Status">
+            <summary>
+            Is number outside its home carrier network.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.Roaming.RoamingCountryCode">
+            <summary>
+            If number is roaming, this is the code of the country number is roaming in.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.Roaming.RoamingNetworkCode">
+            <summary>
+            If number is roaming, this is the id of the carrier network number is roaming in.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.Roaming.RoamingNetworkName">
+            <summary>
+            If number is roaming, this is the name of the carrier network number is roaming in.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.RequestPrice">
+            <summary>
+            The amount in EUR charged to your account.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.RefundPrice">
+            <summary>
+            If there is an internal lookup error, the refund_price will reflect the lookup price. 
+            If cnam is requested for a non-US number the refund_price will reflect the cnam price. 
+            If both of these conditions occur, refund_price is the sum of the lookup price and cnam price.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.RemainingBalance">
+            <summary>
+            Your account balance in EUR after this request. Not returned with Number Insight Advanced Async API.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.CurrentCarrier">
+            <summary>
+            Information about the network number is currently connected to.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.OriginalCarrier">
+            <summary>
+            Information about the network number is currently connected to.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.Ported">
+            <summary>
+            If the user has changed carrier for number. 
+            The assumed status means that the information supplier has 
+            replied to the request but has not said explicitly that the number is ported.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.Roaming">
+            <summary>
+            Information about the roaming status for number. This is applicable to mobile numbers only.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.CallerIdentity">
+            <summary>
+            Information about the network number is currently connected to.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.CallerName">
+            <summary>
+            Full name of the person or business who owns the phone number. 
+            Unknown if this information is not available. 
+            This parameter is only present if cnam had a value of true within the request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.LastName">
+            <summary>
+            Last name of the person who owns the phone number if the owner is an individual. 
+            This parameter is only present if cnam had a value of true within the request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.FirstName">
+            <summary>
+            First name of the person who owns the phone number if the owner is an individual. 
+            This parameter is only present if cnam had a value of true within the request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardInsightResponse.CallerType">
+            <summary>
+            The value will be business if the owner of a phone number is a business. 
+            If the owner is an individual the value will be consumer. 
+            The value will be unknown if this information is not available. 
+            This parameter is only present if cnam had a value of true within the request.
+            </summary>
+        </member>
+        <member name="P:Vonage.NumberInsights.StandardNumberInsightRequest.Cnam">
+            <summary>
+            Indicates if the name of the person who owns the phone number should be looked up and returned in the response. 
+            Set to true to receive phone number owner name in the response. 
+            This features is available for US numbers only and incurs an additional charge.
+            </summary>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.GetOwnedNumbersAsync(Vonage.Numbers.NumberSearchRequest,Vonage.Request.Credentials)">
+            <summary>
+            Retrieve all the inbound numbers associated with your Vonage account.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.GetAvailableNumbersAsync(Vonage.Numbers.NumberSearchRequest,Vonage.Request.Credentials)">
+            <summary>
+            Retrieve inbound numbers that are available for the specified country.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.BuyANumberAsync(Vonage.Numbers.NumberTransactionRequest,Vonage.Request.Credentials)">
+            <summary>
+            Request to purchase a specific inbound number.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.CancelANumberAsync(Vonage.Numbers.NumberTransactionRequest,Vonage.Request.Credentials)">
+            <summary>
+            Cancel your subscription for a specific inbound number.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.UpdateANumberAsync(Vonage.Numbers.UpdateNumberRequest,Vonage.Request.Credentials)">
+            <summary>
+            Change the behaviour of a number that you own.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.GetOwnedNumbers(Vonage.Numbers.NumberSearchRequest,Vonage.Request.Credentials)">
+            <summary>
+            Retrieve all the inbound numbers associated with your Vonage account.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.GetAvailableNumbers(Vonage.Numbers.NumberSearchRequest,Vonage.Request.Credentials)">
+            <summary>
+            Retrieve inbound numbers that are available for the specified country.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.BuyANumber(Vonage.Numbers.NumberTransactionRequest,Vonage.Request.Credentials)">
+            <summary>
+            Request to purchase a specific inbound number.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.CancelANumber(Vonage.Numbers.NumberTransactionRequest,Vonage.Request.Credentials)">
+            <summary>
+            Cancel your subscription for a specific inbound number.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Numbers.INumbersClient.UpdateANumber(Vonage.Numbers.UpdateNumberRequest,Vonage.Request.Credentials)">
+            <summary>
+            Change the behaviour of a number that you own.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Numbers.Number.Country">
+            <summary>
+            The two character country code in ISO 3166-1 alpha-2 format
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.Number.Msisdn">
+            <summary>
+            An available inbound virtual number.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.Number.Type">
+            <summary>
+            The type of number: landline, landline-toll-free or mobile-lvn
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.Number.Features">
+            <summary>
+            The capabilities of the number: SMS or VOICE or SMS,VOICE or SMS,MMS or VOICE,MMS or SMS,MMS,VOICE
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.Number.Cost">
+            <summary>
+            The monthly rental cost for this number, in Euros
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberSearchRequest.Country">
+            <summary>
+            The two character country code in ISO 3166-1 alpha-2 format
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberSearchRequest.Type">
+            <summary>
+            Set this parameter to filter the type of number, such as mobile or landline
+            Must be one of: landline, mobile-lvn or landline-toll-free
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberSearchRequest.Pattern">
+            <summary>
+            The number pattern you want to search for. Use in conjunction with search_pattern.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberSearchRequest.SearchPattern">
+            <summary>
+            The strategy you want to use for matching
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberSearchRequest.Features">
+            <summary>
+            Available features are SMS, VOICE and MMS. To look for numbers that support multiple features, use a comma-separated value: SMS,MMS,VOICE.
+            Must be one of: SMS, VOICE, SMS,VOICE, MMS, SMS,MMS, VOICE,MMS or SMS,MMS,VOICE
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberSearchRequest.Size">
+            <summary>
+            Page size
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberSearchRequest.Index">
+            <summary>
+            Page index
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberSearchRequest.HasApplication">
+            <summary>
+            Set this optional field to true to restrict your results to numbers associated with an Application (any Application). 
+            Set to false to find all numbers not associated with any Application. Omit the field to avoid filtering on whether or not the number is assigned to an Application.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumbersSearchResponse.Count">
+            <summary>
+            The total amount of numbers available in the pool.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumbersSearchResponse.Numbers">
+            <summary>
+            A paginated array of available numbers and their details
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberTransactionRequest.Country">
+            <summary>
+            The two character country code in ISO 3166-1 alpha-2 format
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberTransactionRequest.Msisdn">
+            <summary>
+            An available inbound virtual number.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberTransactionRequest.TargetApiKey">
+            <summary>
+            If you’d like to perform an action on a subaccount, provide the 
+            api_key of that account here. If you’d like to perform an action on your own account, 
+            you do not need to provide this field.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberTransactionResponse.ErrorCode">
+            <summary>
+            The status code of the response. 200 indicates a successful request.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.NumberTransactionResponse.ErrorCodeLabel">
+            <summary>
+            The status code description
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.UpdateNumberRequest.Country">
+            <summary>
+            The two character country code in ISO 3166-1 alpha-2 format
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.UpdateNumberRequest.Msisdn">
+            <summary>
+            An available inbound virtual number.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.UpdateNumberRequest.AppId">
+            <summary>
+            The Application that will handle inbound traffic to this number.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.UpdateNumberRequest.MoHttpUrl">
+            <summary>
+            An URL-encoded URI to the webhook endpoint that handles inbound messages. 
+            Your webhook endpoint must be active before you make this request. 
+            Vonage makes a GET request to the endpoint and checks that it returns a 200 OK response. 
+            Set this parameter's value to an empty string to remove the webhook.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.UpdateNumberRequest.MoSmppSysType">
+            <summary>
+            The associated system type for your SMPP client
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.UpdateNumberRequest.VoiceCallbackType">
+            <summary>
+            Specify whether inbound voice calls on your number are forwarded to a SIP or a telephone number. 
+            This must be used with the voiceCallbackValue parameter. 
+            If set, sip or tel are prioritized over the Voice capability in your Application. 
+            Note: The app value is deprecated and will be removed in future.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.UpdateNumberRequest.VoiceCallbackValue">
+            <summary>
+            A SIP URI or telephone number. Must be used with the voiceCallbackType parameter.
+            </summary>
+        </member>
+        <member name="P:Vonage.Numbers.UpdateNumberRequest.VoiceStatusCallback">
+            <summary>
+            A webhook URI for Vonage to send a request to when a call ends
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Country.CountryCode">
+            <summary>
+            Two letter country code.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Country.CountryName">
+            <summary>
+            Readable country name.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Country.CountryDisplayName">
+            <summary>
+            Readable country name.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Country.Currency">
+            <summary>
+            The currency that your account is being billed in (by default Euros—EUR). 
+            Can change in the Dashboard to US Dollars—USD.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Country.DefaultPrice">
+            <summary>
+            The default price.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Country.DialingPrefix">
+            <summary>
+            The dialling prefix.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Country.Networks">
+            <summary>
+            An array of network objects
+            </summary>
+        </member>
+        <member name="M:Vonage.Pricing.IPricingClient.RetrievePricingCountryAsync(System.String,Vonage.Pricing.PricingCountryRequest,Vonage.Request.Credentials)">
+            <summary>
+            Retrieves the pricing information based on the specified country.
+            </summary>
+            <param name="type">The type of service you wish to retrieve data about: 
+            either sms, sms-transit or voice.</param>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Pricing.IPricingClient.RetrievePricingAllCountriesAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            Retrieves the pricing information for all countries.
+            </summary>
+            <param name="type">The type of service you wish to retrieve data about: 
+            either sms, sms-transit or voice.</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Pricing.IPricingClient.RetrievePrefixPricingAsync(System.String,Vonage.Pricing.PricingPrefixRequest,Vonage.Request.Credentials)">
+            <summary>
+            Retrieves the pricing information based on the dialing prefix.
+            </summary>
+            <param name="type">The type of service you wish to retrieve data about: 
+            either sms, sms-transit or voice.</param>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Pricing.IPricingClient.RetrievePricingCountry(System.String,Vonage.Pricing.PricingCountryRequest,Vonage.Request.Credentials)">
+            <summary>
+            Retrieves the pricing information based on the specified country.
+            </summary>
+            <param name="type">The type of service you wish to retrieve data about: 
+            either sms, sms-transit or voice.</param>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Pricing.IPricingClient.RetrievePricingAllCountries(System.String,Vonage.Request.Credentials)">
+            <summary>
+            Retrieves the pricing information for all countries.
+            </summary>
+            <param name="type">The type of service you wish to retrieve data about: 
+            either sms, sms-transit or voice.</param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Pricing.IPricingClient.RetrievePrefixPricing(System.String,Vonage.Pricing.PricingPrefixRequest,Vonage.Request.Credentials)">
+            <summary>
+            Retrieves the pricing information based on the dialing prefix.
+            </summary>
+            <param name="type">The type of service you wish to retrieve data about: 
+            either sms, sms-transit or voice.</param>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Pricing.Network.Type">
+            <summary>
+            The type of network: mobile or landline.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Network.Price">
+            <summary>
+            The cost to send a message or make a call to this network
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Network.Currency">
+            <summary>
+            The currency used for prices for this network.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Network.Mcc">
+            <summary>
+            The Mobile Country Code of the operator.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Network.Mnc">
+            <summary>
+            The Mobile Network Code of the operator.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Network.NetworkCode">
+            <summary>
+            The Mobile Country Code and Mobile Network Code combined to give a unique reference for the operator.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.Network.NetworkName">
+            <summary>
+            The company/organisational name of the operator.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.PricingCountryRequest.Country">
+            <summary>
+            A two letter country code. For example, CA.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.PricingPrefixRequest.Prefix">
+            <summary>
+            The numerical dialing prefix to look up pricing for. Examples include 44, 1 and so on.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.PricingResult.Count">
+            <summary>
+            The number of countries retrieved.
+            </summary>
+        </member>
+        <member name="P:Vonage.Pricing.PricingResult.Countries">
+            <summary>
+            The code for the country you looked up: e.g. GB, US, BR, RU.
+            </summary>
+        </member>
+        <member name="M:Vonage.Redaction.IRedactClient.RedactAsync(Vonage.Redaction.RedactRequest,Vonage.Request.Credentials)">
+            <summary>
+            Redact a specific message
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Redaction.IRedactClient.Redact(Vonage.Redaction.RedactRequest,Vonage.Request.Credentials)">
+            <summary>
+            Redact a specific message
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Redaction.RedactRequest.Id">
+            <summary>
+            The transaction ID to redact
+            </summary>
+        </member>
+        <member name="P:Vonage.Redaction.RedactRequest.Product">
+            <summary>
+            Product name that the ID provided relates to
+            </summary>
+        </member>
+        <member name="P:Vonage.Redaction.RedactRequest.Type">
+            <summary>
+            Required if redacting SMS data
+            </summary>
+        </member>
+        <member name="T:Vonage.Request.ApiRequest">
+            <summary>
+            Responsible for sending all Vonage API requests that do not make use of Application authentication.
+            For application authentication, see VersionedApiRequest.
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.SetUserAgent(System.Net.Http.HttpRequestMessage@,Vonage.Request.Credentials)">
+            <summary>
+            Sets the user agent for an HTTP request
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.BuildQueryString(System.Collections.Generic.IDictionary{System.String,System.String},Vonage.Request.Credentials)">
+            <summary>
+            Builds a query string for a get request - if there is a security secret a signature is built for the request and added to the query string
+            </summary>
+            <param name="parameters"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.GetParameters(System.Object)">
+            <summary>
+            extracts parameters from an object into a dictionary
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.GetBaseUriFor(System.String)">
+            <summary>
+            Retrieves the Base URI for a given component and appends the given url to the end of it.
+            </summary>
+            <param name="component"></param>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.GetQueryStringBuilderFor(System.Object,Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            Creates a query string for the given parameters - if the auth type is Query the credentials are appended to the end of the query string
+            </summary>
+            <param name="parameters"></param>
+            <param name="type"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoGetRequestWithQueryParametersAsync``1(System.Uri,Vonage.Request.ApiRequest.AuthType,System.Object,Vonage.Request.Credentials)">
+            <summary>
+            SendAsync a GET request to the versioned Vonage API.
+            Do not include credentials in the parameters object. If you need to override credentials, use the optional Credentials parameter.
+            </summary>
+            <param name="uri">The URI to GET</param>
+            <param name="parameters">Parameters required by the endpoint (do not include credentials)</param>
+            <param name="credentials">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">Thrown if the API encounters a non-zero result</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoGetRequestWithQueryParameters``1(System.Uri,Vonage.Request.ApiRequest.AuthType,System.Object,Vonage.Request.Credentials)">
+            <summary>
+            SendAsync a GET request to the versioned Vonage API.
+            Do not include credentials in the parameters object. If you need to override credentials, use the optional Credentials parameter.
+            </summary>
+            <param name="uri">The URI to GET</param>
+            <param name="parameters">Parameters required by the endpoint (do not include credentials)</param>
+            <param name="credentials">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">Thrown if the API encounters a non-zero result</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.SendGetRequest``1(System.Uri,Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            Sends an HTTP GET request to the Vonage API without any additional parameters
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="uri"></param>
+            <param name="authType"></param>
+            <param name="creds"></param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">Thrown if the API encounters a non-zero result</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.SendGetRequestAsync``1(System.Uri,Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            Sends an HTTP GET request to the Vonage API without any additional parameters
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="uri"></param>
+            <param name="authType"></param>
+            <param name="creds"></param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">Thrown if the API encounters a non-zero result</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoRequestWithUrlContentAsync(System.String,System.Uri,System.Collections.Generic.Dictionary{System.String,System.String},Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            SendAsync a request to the Vonage API using the specified HTTP method and the provided parameters.
+            Do not include credentials in the parameters object. If you need to override credentials, use the optional Credentials parameter.
+            </summary>
+            <param name="method">HTTP method (POST, PUT, DELETE, etc)</param>
+            <param name="uri">The URI to communicate with</param>
+            <param name="parameters">Parameters required by the endpoint (do not include credentials)</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoRequestWithUrlContent(System.String,System.Uri,System.Collections.Generic.Dictionary{System.String,System.String},Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            SendAsync a request to the Vonage API using the specified HTTP method and the provided parameters.
+            Do not include credentials in the parameters object. If you need to override credentials, use the optional Credentials parameter.
+            </summary>
+            <param name="method">HTTP method (POST, PUT, DELETE, etc)</param>
+            <param name="uri">The URI to communicate with</param>
+            <param name="parameters">Parameters required by the endpoint (do not include credentials)</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.SendHttpRequestAsync(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Sends an HttpRequest on to the Vonage API
+            </summary>
+            <param name="req"></param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.SendHttpRequest(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Sends an HttpRequest on to the Vonage API
+            </summary>
+            <param name="req"></param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoRequestWithJsonContentAsync``1(System.String,System.Uri,System.Object,Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            SendAsync a request to the versioned Vonage API.
+            Do not include credentials in the parameters object. If you need to override credentials, use the optional Credentials parameter.
+            </summary>
+            <param name="method">HTTP method (POST, PUT, DELETE, etc)</param>
+            <param name="uri">The URI to communicate with</param>
+            <param name="payload">Parameters required by the endpoint (do not include credentials)</param>
+            <param name="authType">Authorization type used on the API</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoRequestWithJsonContent``1(System.String,System.Uri,System.Object,Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            SendAsync a request to the versioned Vonage API.
+            Do not include credentials in the parameters object. If you need to override credentials, use the optional Credentials parameter.
+            </summary>
+            <param name="method">HTTP method (POST, PUT, DELETE, etc)</param>
+            <param name="uri">The URI to communicate with</param>
+            <param name="payload">Parameters required by the endpoint (do not include credentials)</param>
+            <param name="authType">Authorization type used on the API</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoGetRequestWithJwtAsync(System.Uri,Vonage.Request.Credentials)">
+            <summary>
+            Sends a GET request to the Vonage API using a JWT and returns the full HTTP resonse message 
+            this is primarily for pulling a raw stream off an API call -e.g. a recording
+            </summary>
+            <param name="uri"></param>
+            <param name="creds"></param>
+            <returns>HttpResponseMessage</returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoGetRequestWithJwt(System.Uri,Vonage.Request.Credentials)">
+            <summary>
+            Sends a GET request to the Vonage API using a JWT and returns the full HTTP resonse message 
+            this is primarily for pulling a raw stream off an API call -e.g. a recording
+            </summary>
+            <param name="uri"></param>
+            <param name="creds"></param>
+            <returns>HttpResponseMessage</returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoPostRequestUrlContentFromObjectAsync``1(System.Uri,System.Object,Vonage.Request.Credentials)">
+            <summary>
+            Sends a Post request to the specified endpoint with the given parameters
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="uri"></param>
+            <param name="parameters"></param>
+            <param name="creds"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoPostRequestUrlContentFromObject``1(System.Uri,System.Object,Vonage.Request.Credentials)">
+            <summary>
+            Sends a Post request to the specified endpoint with the given parameters
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="uri"></param>
+            <param name="parameters"></param>
+            <param name="creds"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoPostRequestWithUrlContentAsync``1(System.Uri,System.Collections.Generic.Dictionary{System.String,System.String},Vonage.Request.Credentials)">
+            <summary>
+            SendAsync a Post Request with Url Content
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="uri"></param>
+            <param name="parameters"></param>
+            <param name="creds"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoPostRequestWithUrlContent``1(System.Uri,System.Collections.Generic.Dictionary{System.String,System.String},Vonage.Request.Credentials)">
+            <summary>
+            SendAsync a Post Request with Url Content
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="uri"></param>
+            <param name="parameters"></param>
+            <param name="creds"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoDeleteRequestWithUrlContentAsync(System.Uri,System.Collections.Generic.Dictionary{System.String,System.String},Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            Sends an HTTP DELETE 
+            </summary>
+            <param name="uri"></param>
+            <param name="parameters"></param>
+            <param name="creds"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Request.ApiRequest.DoDeleteRequestWithUrlContent(System.Uri,System.Collections.Generic.Dictionary{System.String,System.String},Vonage.Request.ApiRequest.AuthType,Vonage.Request.Credentials)">
+            <summary>
+            Sends an HTTP DELETE 
+            </summary>
+            <param name="uri"></param>
+            <param name="parameters"></param>
+            <param name="creds"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="F:Vonage.Request.ByteArrayToHexHelper._lookup32">
+            http://stackoverflow.com/questions/311165/how-do-you-convert-byte-array-to-hexadecimal-string-and-vice-versa/24343727#24343727
+            We're not going to going with the unchecked version. Seems overkill for now.
+        </member>
+        <member name="P:Vonage.Request.Credentials.Method">
+            <summary>
+            Method to be used for signing SMS Messages
+            </summary>
+        </member>
+        <member name="P:Vonage.Request.Credentials.ApiKey">
+            <summary>
+            Vonage API Key (from your account dashboard)
+            </summary>
+        </member>
+        <member name="P:Vonage.Request.Credentials.ApiSecret">
+            <summary>
+            Vonage API Secret (from your account dashboard)
+            </summary>
+        </member>
+        <member name="P:Vonage.Request.Credentials.SecuritySecret">
+            <summary>
+            Signature Secret (from API settings section of your account settings)
+            </summary>
+        </member>
+        <member name="P:Vonage.Request.Credentials.ApplicationId">
+            <summary>
+            Application ID (GUID)
+            </summary>
+        </member>
+        <member name="P:Vonage.Request.Credentials.ApplicationKey">
+            <summary>
+            Application private key contents
+            This is the actual key file contents and NOT a path to the key file!
+            </summary>
+        </member>
+        <member name="P:Vonage.Request.Credentials.AppUserAgent">
+            <summary>
+            (Optional) App useragent value to pass with every request
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.Credentials.FromAppIdAndPrivateKey(System.String,System.String)">
+            <summary>
+            Create Credentials from AppId and Private Key
+            </summary>
+            <param name="appId"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Request.Credentials.FromAppIdAndPrivateKeyPath(System.String,System.String)">
+            <summary>
+            Opens private key file and reads it
+            </summary>
+            <param name="appId">Your Vonage Application ID</param>
+            <param name="privateKeyPath">path to your private Key file</param>
+            <exception cref="T:System.UnauthorizedAccessException">Thrown if app doesn't have requried permission to key file</exception>
+            <exception cref="T:System.ArgumentException">privateKeyPath is a zero length string, contains only white space or contains one or more invalid charecters</exception>
+            <exception cref="T:System.ArgumentNullException">privateKeyPath is null</exception>
+            <exception cref="T:System.IO.PathTooLongException">The specified path, filename, or both exceed the system-defined max length</exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid, (for example, it is on an unmapped drive).</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The file specified in path was not found.</exception>
+            <exception cref="T:System.NotSupportedException">path is in an invalid format.</exception>
+            <returns>CredentialsObject</returns>
+        </member>
+        <member name="M:Vonage.Request.Credentials.FromApiKeySignatureSecretAndMethod(System.String,System.String,Vonage.Cryptography.SmsSignatureGenerator.Method)">
+            <summary>
+            Builds Credentials from 
+            </summary>
+            <param name="apiKey"></param>
+            <param name="signatureSecret"></param>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Vonage.Request.TimeSpanSemaphore">
+            <summary>
+            Allows a limited number of acquisitions during a timespan
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.TimeSpanSemaphore.Wait(System.Threading.CancellationToken)">
+            <summary>
+            Blocks the current thread until it can enter the semaphore, while observing a CancellationToken
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.TimeSpanSemaphore.Release">
+            <summary>
+            Exits the semaphore
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.TimeSpanSemaphore.Run(System.Action,System.Threading.CancellationToken)">
+            <summary>
+            Runs an action after entering the semaphore (if the CancellationToken is not canceled)
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.TimeSpanSemaphore.RunAsync(System.Func{System.Threading.Tasks.Task},System.Threading.CancellationToken)">
+            <summary>
+            Runs an action after entering the semaphore (if the CancellationToken is not canceled)
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.TimeSpanSemaphore.RunAsync``1(System.Func{``0,System.Threading.Tasks.Task},``0,System.Threading.CancellationToken)">
+            <summary>
+            Runs an action after entering the semaphore (if the CancellationToken is not canceled)
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.TimeSpanSemaphore.RunAsync``2(System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.Task{``1}},``0,System.Threading.CancellationToken)">
+            <summary>
+            Runs an action after entering the semaphore (if the CancellationToken is not canceled)
+            </summary>
+        </member>
+        <member name="M:Vonage.Request.TimeSpanSemaphore.Dispose">
+            <summary>
+            Releases all resources used by the current instance
+            </summary>
+        </member>
+        <member name="M:Vonage.Utility.WebhookParser.ParseWebhookAsync``1(System.IO.Stream,System.String)">
+            <summary>
+            Parses the stream into the given type
+            This is anticipated to be used by ASP.NET Core MVC/API requests where the content is in the Body of the inbound request
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="request"></param>
+            <param name="contentType">The content type of the request, must be of the type application/json or application/x-www-form-urlencoded</param>
+            <exception cref="T:System.ArgumentException">Thrown if Content type does not contain application/json or application/x-www-form-urlencoded</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Utility.WebhookParser.ParseWebhookAsync``1(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Parses the HttpRequestMessag's content into the given type
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="request"></param>
+            <exception cref="T:System.ArgumentException">Thrown if Content type does not contain application/json or application/x-www-form-urlencoded</exception>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Utility.WebhookParser.ParseWebhook``1(System.IO.Stream,System.String)">
+            <summary>
+            Synchronous Implementation of ParseWebhook
+            Meant to be called from ASP.NET Core MVC with only the Content of the body
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Utility.WebhookParser.ParseWebhook``1(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Synchronous implementation of the ParseWehbook method, meant to be called from 
+            Legacy ASP.NET Web Api with an HttpRequestMessage
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Utility.WebhookParser.ParseQuery``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Microsoft.Extensions.Primitives.StringValues}})">
+            <summary>
+            Used to Parse Query parameters into a givent type
+            This Method will convert the string pairs into a dictioanry and then use
+            Newtonsoft to convert the pairs to JSON - finally resolving the object from JSON
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="requestData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Utility.WebhookParser.ParseQueryNameValuePairs``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Used to Parse Query parameters into a givent type
+            This Method will convert the string pairs into a dictioanry and then use
+            Newtonsoft to convert the pairs to JSON - finally resolving the object from JSON
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="requestData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Utility.WebhookParser.ParseUrlFormString``1(System.String)">
+            <summary>
+            Parses URL content into the given object type
+            This uses Newtonsoft.Json - abnormally named fields should be decorated with the 'JsonPropertyAttribute'
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="contentString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifyRequestAsync(Vonage.Verify.VerifyRequest,Vonage.Request.Credentials)">
+            <summary>
+            Use Verify request to generate and send a PIN to your user
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifyCheckAsync(Vonage.Verify.VerifyCheckRequest,Vonage.Request.Credentials)">
+            <summary>
+            Use Verify check to confirm that the PIN you received from your user matches the one sent by Vonage in your Verify request
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifySearchAsync(Vonage.Verify.VerifySearchRequest,Vonage.Request.Credentials)">
+            <summary>
+            Use Verify search to check the status of past or current verification requests
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifyControlAsync(Vonage.Verify.VerifyControlRequest,Vonage.Request.Credentials)">
+            <summary>
+            Control the progress of your Verify requests. To cancel an existing Verify request, or to trigger the next verification event
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifyRequestWithPSD2Async(Vonage.Verify.Psd2Request,Vonage.Request.Credentials)">
+            <summary>
+            Use Verify request to generate and send a PIN to your user to authorize a payment: 
+            1. Create a request to send a verification code to your user. 
+            2. Check the status field in the response to ensure that your request was successful (zero is success). 
+            3. Use the request_id field in the response for the Verify check.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifyRequest(Vonage.Verify.VerifyRequest,Vonage.Request.Credentials)">
+            <summary>
+            Use Verify request to generate and send a PIN to your user
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifyCheck(Vonage.Verify.VerifyCheckRequest,Vonage.Request.Credentials)">
+            <summary>
+            Use Verify check to confirm that the PIN you received from your user matches the one sent by Vonage in your Verify request
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifySearch(Vonage.Verify.VerifySearchRequest,Vonage.Request.Credentials)">
+            <summary>
+            Use Verify search to check the status of past or current verification requests
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifyControl(Vonage.Verify.VerifyControlRequest,Vonage.Request.Credentials)">
+            <summary>
+            Control the progress of your Verify requests. To cancel an existing Verify request, or to trigger the next verification event
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Verify.IVerifyClient.VerifyRequestWithPSD2(Vonage.Verify.Psd2Request,Vonage.Request.Credentials)">
+            <summary>
+            Use Verify request to generate and send a PIN to your user to authorize a payment: 
+            1. Create a request to send a verification code to your user. 
+            2. Check the status field in the response to ensure that your request was successful (zero is success). 
+            3. Use the request_id field in the response for the Verify check.
+            </summary>
+            <param name="request"></param>
+            <param name="creds"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Vonage.Verify.Psd2Request.Payee">
+            <summary>
+            An alphanumeric string to indicate to the user the 
+            name of the recipient that they are confirming a payment to.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.Psd2Request.Amount">
+            <summary>
+            The Decimal amount of the payment to be confirmed, in Euros
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.Psd2Request.WorkflowId">
+            <summary>
+            Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. 
+            For example, an id of 1 identifies the workflow SMS - TTS - TTS. 
+            For a list of all workflows and their associated ids, please visit the developer portal.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheck.DateReceived">
+            <summary>
+            The date and time this check was received (in the format YYYY-MM-DD HH:MM:SS)
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheck.Code">
+            <summary>
+            The code supplied with this check request
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheck.Status">
+            <summary>
+            One of: VALID or INVALID
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheck.IpAddress">
+            <summary>
+            The IP address, if available (this field is no longer used).
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheckRequest.RequestId">
+            <summary>
+            The Verify request to check. This is the request_id you received in the response to the Verify request
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheckRequest.Code">
+            <summary>
+            The verification code entered by your user.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheckRequest.IpAddress">
+            <summary>
+            (This field is no longer used)
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheckResponse.RequestId">
+            <summary>
+            The request_id that you received in the response to the Verify request and used in the Verify check request.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheckResponse.EventId">
+            <summary>
+            The ID of the verification event, such as an SMS or TTS call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheckResponse.Price">
+            <summary>
+            The cost incurred for this request.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheckResponse.Currency">
+            <summary>
+            The currency code.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyCheckResponse.EstimatedPriceMessagesSent">
+            <summary>
+            This field may not be present, depending on your pricing model. 
+            The value indicates the cost (in EUR) of the calls made and messages sent for the verification process. 
+            This value may be updated during and shortly after the request completes because user input events can overlap with message/call events. 
+            When this field is present, the total cost of the verification is the sum of this field and the price field.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyControlRequest.RequestId">
+            <summary>
+            The request_id you received in the response to the Verify request.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyControlRequest.Cmd">
+            <summary>
+            The possible commands are cancel to request cancellation of the verification process,
+            or trigger_next_event to advance to the next verification event (if any). 
+            Cancellation is only possible 30 seconds after the start of the verification request and 
+            before the second event (either TTS or SMS) has taken place.
+            must be one of 'cancel' or 'trigger_next_event'
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequest.Brand">
+            <summary>
+            An 18-character alphanumeric string you can use to personalize the verification request SMS body, to help users identify your company or application name. For example: "Your Acme Inc PIN is ..."
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequest.SenderId">
+            <summary>
+            An 11-character alphanumeric string that represents the identity of the sender of the verification request: https://developer.nexmo.com/messaging/sms/guides/custom-sender-id. 
+            Depending on the destination of the phone number you are sending the verification SMS to, restrictions might apply.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequest.WorkflowId">
+            <summary>
+            Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. 
+            For example, an id of 1 identifies the workflow SMS - TTS - TTS. 
+            For a list of all workflows and their associated ids, please visit the developer portal.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequestBase.Number">
+            <summary>
+            The mobile or landline phone number to verify. Unless you are setting country explicitly, this number must be in E.164 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequestBase.Country">
+            <summary>
+            If you do not provide number in international format or you are not sure if number is correctly formatted, specify the two-character country code in country. Verify will then format the number for you.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequestBase.CodeLength">
+            <summary>
+            The length of the verification code. Must be 4 or 6
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequestBase.Lg">
+            <summary>
+            By default, the SMS or text-to-speech (TTS) message is generated in the locale that matches the number. 
+            For example, the text message or TTS message for a 33* number is sent in French. 
+            Use this parameter to explicitly control the language used for the Verify request. 
+            A list of languages is available: https://developer.nexmo.com/verify/guides/verify-languages
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequestBase.PinExpiry">
+            <summary>
+            How long the generated verification code is valid for, in seconds. 
+            When you specify both pin_expiry and next_event_wait then pin_expiry must be an integer 
+            multiple of next_event_wait otherwise pin_expiry is defaulted to equal next_event_wait. 
+            See changing the event timings: https://developer.nexmo.com/verify/guides/changing-default-timings.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyRequestBase.NextEventWait">
+            <summary>
+            Specifies the wait time in seconds between attempts to deliver the verification code.
+            Must be between 60 and 900
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyResponseBase.Status">
+            <summary>
+            A value of 0 indicates that your user entered the correct code. If it is non-zero, check the error_text.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifyResponseBase.ErrorText">
+            <summary>
+            If the status is non-zero, this explains the error encountered.
+            </summary>
+        </member>
+        <member name="P:Vonage.Verify.VerifySearchRequest.RequestId">
+            <summary>
+            The request_id you received in the Verify Request Response.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.AnswerWebhooks.Answer.To">
+            <summary>
+            The number the call came from (this could be your Vonage number if the call is started programmatically)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.AnswerWebhooks.Answer.From">
+            <summary>
+            The call the number is to (this could be a Vonage number or another phone number)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.AnswerWebhooks.Answer.Uuid">
+            <summary>
+            A unique identifier for this call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.AnswerWebhooks.Answer.ConversationUuid">
+            <summary>
+            A unique identifier for this conversation
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.To">
+            <summary>
+            The single or mixed collection of endpoint types you connected to. Possible values.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.From">
+            <summary>
+            The endpoint you are calling from. Possible value are the same as to.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.Ncco">
+            <summary>
+            This will convert to ncco as per the CallCommandConverter - it is preferable to use this over the JArray Ncco
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.AnswerUrl">
+            <summary>
+            The webhook endpoint where you provide the Vonage Call Control Object that governs this call. As soon as your user answers a call, Platform requests this NCCO from answer_url. Use answer_method to manage the HTTP method.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.AnswerMethod">
+            <summary>
+            Optional. The HTTP method used to send event information to answer_url. The default value is GET.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.EventUrl">
+            <summary>
+            Optional. Platform sends event information asynchronously to this endpoint when status changes. For more information about the values sent, see callback.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.EventMethod">
+            <summary>
+            Optional. The HTTP method used to send event information to event_url. The default value is POST.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.MachineDetection">
+            <summary>
+            Optional. Configure the behavior when Vonage detects that a destination is an answerphone.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.LengthTimer">
+            <summary>
+            Optional. Set the number of seconds that elapse before Vonage hangs up after the call state changes to in_progress. The default value is 7200, two hours. This is also the maximum value.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.RingingTimer">
+            <summary>
+            Optional. Set the number of seconds that elapse before Vonage hangs up after the call state changes to 'ringing'. The default value is 60, the maximum value is 120.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommand.RandomFromNumber">
+            <summary>
+            Set to <code>true</code> to use random phone number as the <code>from</code>. This number will be selected from the list of nubmers assigned to the current application. <code>RandomFromNumber = true  </code> cannot be used together with <code>From</code>
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommandResponse.Message">
+            <summary>
+            A string explaining the state of this request.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallCommandResponse.Uuid">
+            <summary>
+            The unique id for this request.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallEditCommand.Action">
+            <summary>
+            Use one of the following options to modify the call:
+            hangup    Terminates this call leg.
+            mute      Mutes this call leg.
+            unmute    Unmutes this call leg.
+            earmuff   Prevents the recipient of this call leg from hearing other parts of the conversation.
+            unearmuff Removes the earmuff effect from this call leg.
+            transfer  Transfers this call leg to another NCCO, as specified by the destination parameter.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallEditCommand.Destination">
+            <summary>
+            Optional. A JSON object pointing to a replacement NCCO, when action is transfer.
+            </summary>        
+        </member>
+        <member name="P:Vonage.Voice.CallEndpoint.Type">
+            <summary>
+            One of the following: phone, websocket, sip
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallEndpoint.Number">
+            <summary>
+            The phone number to connect to in E.164 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallEndpoint.DtmfAnswer">
+            <summary>
+            Set the digits that are sent to the user as soon as the Call is answered. The * and # digits are respected. You create pauses using p. Each pause is 500ms.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallEndpoint.Uri">
+            <summary>
+            The URI to the websocket you are streaming to.
+            OR
+            The SIP URI to the endpoint you are connecting to in the format sip:rebekka@sip.example.com.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallEndpoint.ContentType">
+            <summary>
+            The internet media type for the audio you are streaming.Possible values are: audio/l16; rate=16000
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallEndpoint.Headers">
+            <summary>
+            A JSON object containing any metadata you want.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.Uuid">
+            <summary>
+             A unique identifier for this Call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.ConversationUuid">
+            <summary>
+            A unique identifier for the Conversation this Call is part of.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.To">
+            <summary>
+            The single or mixed collection of endpoint types you connected to.Possible value are:
+             phone - phone numbers in e.164 format.Options are:
+               number - the phone number to connect to in E.164 format.
+               dtmfAnswer - Set the digits that are sent to the user as soon as the Call is answered.The* and # digits are respected. You create pauses using p. Each pause is 500ms.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.From">
+            <summary>
+            The endpoint you called from. Possible values are the same as to 
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.Direction">
+            <summary>
+            Possible values are outbound or inbound.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.RecordingUrl">
+            <summary>
+            The URL to download a call or conversation recording from.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.StartTime">
+            <summary>
+            The time the Call started
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.Network">
+            <summary>
+            The Mobile Country Code Mobile Network Code (MCCMNC) for the carrier network used to make this Call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.Status">
+            <summary>
+            The status of the Call. Possible values are:
+             started - Platform has stared the Call.
+             ringing - the user's handset is ringing.
+             answered - the user has answered your Call.
+             timeout - your user did not answer your Call with ringing_timer.
+             machine - Platform detected an answering machine.
+             completed - Platform has terminated this Call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.Rate">
+            <summary>
+            The price per minute for this Call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.Price">
+            <summary>
+            The total price charged for this Call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.Duration">
+            <summary>
+            The time elapsed for the Call to take place in seconds.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallRecord.EndTime">
+            <summary>
+            The time the Call ended
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallResponse.Uuid">
+            <summary>
+             A unique identifier for this Call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallResponse.ConversationUuid">
+            <summary>
+            A unique identifier for the Conversation this Call is part of.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallResponse.Direction">
+            <summary>
+            Possible values are outbound or inbound.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallResponse.Status">
+            <summary>
+            The status of the Call. Possible values are:
+             started - Platform has stared the Call.
+             ringing - the user's handset is ringing.
+             answered - the user has answered your Call.
+             timeout - your user did not answer your Call with ringing_timer.
+             machine - Platform detected an answering machine.
+             completed - Platform has terminated this Call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallSearchFilter.Status">
+            <summary>
+            Filter on the status of this Call.Possible values are:
+             started - Platform has stared the call.
+             ringing - the user's handset is ringing.
+             answered - the user has answered your call.
+             timeout - your user did not answer your call with ringing_timer.
+             machine - Platform detected an answering machine.
+             completed - Platform has terminated this call.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallSearchFilter.DateStart">
+            <summary>
+            Return the records that occurred after this point in time.
+            Times must be in UTC, they will not be converted.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallSearchFilter.DateEnd">
+            <summary>
+            Return the records that occurred before this point in time.
+            Times must be in UTC, they will not be converted.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallSearchFilter.PageSize">
+            <summary>
+            Return this amount of records in the response. The default value is 10.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallSearchFilter.RecordIndex">
+            <summary>
+            Return page_size Calls from this index in the response. That is, if your request returns 300 Calls, set record_index to 5 in order to return Calls 50 to 59. The default value is 0. That is, the first page_size Calls.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallSearchFilter.Order">
+            <summary>
+            Return the results in:
+             asc - ascending order.This is the default value.
+             desc - descending order.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.CallSearchFilter.ConversationUuid">
+            <summary>
+             Return all the records associated with a specific Conversation.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.DtmfCommand.Digits">
+            <summary>
+            The array of digits to send to the call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Answered.StartTime">
+            <summary>
+            call start time
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Answered.Rate">
+            <summary>
+            cost rate for the call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Answered.Network">
+            <summary>
+            Network the call came from
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.CallStatusEvent.To">
+            <summary>
+            The number the call was made to
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.CallStatusEvent.From">
+            <summary>
+            The number the call came from
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.CallStatusEvent.ConversationUuid">
+            <summary>
+            The unique identifier for this conversation
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.CallStatusEvent.Status">
+            <summary>
+            Call status
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.CallStatusEvent.Direction">
+            <summary>
+            Call direction, can be either inbound or outbound
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.CallStatusEvent.Detail">
+            <summary>
+            Extra detail for the status webhook - only present in some instances
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Completed.EndTime">
+            <summary>
+            Timestamp (ISO 8601 format) of the end time of the call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Completed.Network">
+            <summary>
+            The type of network that was used in the call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Completed.Duration">
+            <summary>
+            Call length (in seconds)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Completed.StartTime">
+            <summary>
+            Timestamp (ISO 8601 format)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Completed.Rate">
+            <summary>
+            Cost per minute of the call (EUR)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Completed.Price">
+            <summary>
+            Total cost of the call (EUR)
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.no_detail">
+            <summary>
+            no detail provided
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.unmapped_detail">
+            <summary>
+            detail provided but not mapped to an enum
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.invalid_number">
+            <summary>
+            number invalid
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.restricted">
+            <summary>
+            Rejected by carrier
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.declined">
+            <summary>
+            rejected by callee
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.cannot_route">
+            <summary>
+            cannot route to the number
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.number_out_of_service">
+            <summary>
+            Number is not available anymore.
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.internal_error">
+            <summary>
+            Server error or failure
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.carrier_timeout">
+            <summary>
+            Carrier timed out
+            </summary>
+        </member>
+        <member name="F:Vonage.Voice.EventWebhooks.DetailedStatus.unavailable">
+            <summary>
+            Callee is temorarily unavailable.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.DtmfResult.Digits">
+            <summary>
+            the dtmf digits input by the user
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.DtmfResult.TimedOut">
+            <summary>
+            indicates whether the dtmf input timed out
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Error.Reason">
+            <summary>
+            Information about the nature of the error
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Error.ConversationUuid">
+            <summary>
+            The unique identifier for this conversation
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Event.Uuid">
+            <summary>
+            The unique identifier for this call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.EventBase.TimeStamp">
+            <summary>
+            Timestamp (ISO 8601 format)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.HumanMachine.Uuid">
+            <summary>
+            The unique identifier for this call (Note call_uuid, not uuid as in some other endpoints)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Input.Dtmf">
+            <summary>
+            The buttons pressed by the user
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Input.TimedOut">
+            <summary>
+            Whether the input action timed out: true if it did, false if not
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Input.ConversationUuid">
+            <summary>
+            The unique identifier for this conversation
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Input.From">
+            <summary>
+            The number the call came from
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Input.To">
+            <summary>
+            The number the call was made to
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.MultiInput.Dtmf">
+            <summary>
+            Result of Dtmf input
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.MultiInput.Speech">
+            <summary>
+            Result of the speech recognition
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Notification`1.Payload">
+            <summary>
+            Custom payload of for the notification action
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Notification`1.ConversationUuid">
+            <summary>
+            A unique identifier for this conversation
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Record.StartTime">
+            <summary>
+            Timestamp (ISO 8601 format) of the start time of the call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Record.RecordingUrl">
+            <summary>
+            Where to download the recording from
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Record.Size">
+            <summary>
+            The size of the recording file (in bytes)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Record.Uuid">
+            <summary>
+            A unique identifier for this recording
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Record.EndTime">
+            <summary>
+            Timestamp (ISO 8601 format) of the end time of the call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Record.ConversationUuid">
+            <summary>
+            The unique identifier for this conversation
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.SpeechRecognitionResult.Text">
+            <summary>
+            Transcript text representing the words that the user spoke.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.SpeechRecognitionResult.Confidence">
+            <summary>
+            The confidence estimate between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.SpeechResult.TimeoutReason">
+            <summary>
+            Indicates if the input ended when user stopped speaking (end_on_silence_timeout), by max duration timeout (max_duration) or if the user didn't say anything (start_timeout)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.SpeechResult.Error">
+            <summary>
+            Error field in case there was a problem during speech recognition - will not be present if nothing went wrong.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.SpeechResult.SpeechResults">
+            <summary>
+            Array of SpeechRecognitionResults
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Transfer.ConversationUuidFrom">
+            <summary>
+            The conversation ID that the leg was originally in
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.EventWebhooks.Transfer.ConversationUuidTo">
+            <summary>
+            The conversation ID that the leg was transferred to
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.GetRecordingResponse.Status">
+            <summary>
+            Response Status of the HTTP Request
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.GetRecordingResponse.ResultStream">
+            <summary>
+            Stream of bytes containg the recording file's content
+            </summary>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.CreateCallAsync(Vonage.Voice.CallCommand,Vonage.Request.Credentials)">
+            <summary>
+            POST /v1/calls - create an outbound SIP or PSTN Call
+            </summary>
+            <param name="command"></param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.GetCallsAsync(Vonage.Voice.CallSearchFilter,Vonage.Request.Credentials)">
+            <summary>
+            GET /v1/calls - retrieve information about all your Calls
+            <param name="filter">Filter to search calls on</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            </summary>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.GetCallAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            GET /v1/calls/{uuid} - retrieve information about a single Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.UpdateCallAsync(System.String,Vonage.Voice.CallEditCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid} - modify an existing Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StartStreamAsync(System.String,Vonage.Voice.StreamCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/stream - stream an audio file to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StopStreamAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            DELETE /v1/calls/{uuid}/stream - stop streaming an audio file to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StartTalkAsync(System.String,Vonage.Voice.TalkCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/talk - send a synthesized speech message to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StopTalkAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            DELETE /v1/calls/{uuid}/talk - stop sending a synthesized speech message to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StartDtmfAsync(System.String,Vonage.Voice.DtmfCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/dtmf - send Dual-tone multi-frequency(DTMF) tones to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.GetRecordingAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            GET - retrieves the recording from a call based off of the input url
+            </summary>
+            <param name="recordingUrl">Url where the recorded call lives</param>
+            <param name="creds">Overridden credentials</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+            <returns>A response containing a byte array representing the file stream</returns>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.CreateCall(Vonage.Voice.CallCommand,Vonage.Request.Credentials)">
+            <summary>
+            POST /v1/calls - create an outbound SIP or PSTN Call
+            </summary>
+            <param name="command"></param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.GetCalls(Vonage.Voice.CallSearchFilter,Vonage.Request.Credentials)">
+            <summary>
+            GET /v1/calls - retrieve information about all your Calls
+            <param name="filter">Filter to search calls on</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            </summary>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.GetCall(System.String,Vonage.Request.Credentials)">
+            <summary>
+            GET /v1/calls/{uuid} - retrieve information about a single Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.UpdateCall(System.String,Vonage.Voice.CallEditCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid} - modify an existing Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StartStream(System.String,Vonage.Voice.StreamCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/stream - stream an audio file to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StopStream(System.String,Vonage.Request.Credentials)">
+            <summary>
+            DELETE /v1/calls/{uuid}/stream - stop streaming an audio file to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StartTalk(System.String,Vonage.Voice.TalkCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/talk - send a synthesized speech message to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StopTalk(System.String,Vonage.Request.Credentials)">
+            <summary>
+            DELETE /v1/calls/{uuid}/talk - stop sending a synthesized speech message to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.StartDtmf(System.String,Vonage.Voice.DtmfCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/dtmf - send Dual-tone multi-frequency(DTMF) tones to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.GetRecording(System.String,Vonage.Request.Credentials)">
+            <summary>
+            GET - retrieves the recording from a call based off of the input url
+            </summary>
+            <param name="recordingUrl">Url where the recorded call lives</param>
+            <param name="creds">Overridden credentials</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+            <returns>A response containing a byte array representing the file stream</returns>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.CreateCallAsync(System.String,System.String,Vonage.Voice.Nccos.Ncco)">
+            <summary>
+            POST /v1/calls - create an outbound PSTN Call
+            </summary>
+            <param name="toNumber"></param>
+            <param name="fromNumber"></param>
+            <param name="ncco"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.CreateCallAsync(Vonage.Voice.Nccos.Endpoints.Endpoint,System.String,Vonage.Voice.Nccos.Ncco)">
+            <summary>
+             POST /v1/calls - create an outbound without PSTN Call
+            </summary>
+            <param name="toEndPoint"></param>
+            <param name="fromNumber"></param>
+            <param name="ncco"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.CreateCall(System.String,System.String,Vonage.Voice.Nccos.Ncco)">
+            <summary>
+            POST /v1/calls - create an outbound PSTN Call
+            </summary>
+            <param name="toNumber"></param>
+            <param name="fromNumber"></param>
+            <param name="ncco"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.IVoiceClient.CreateCall(Vonage.Voice.Nccos.Endpoints.Endpoint,System.String,Vonage.Voice.Nccos.Ncco)">
+            <summary>
+             POST /v1/calls - create an outbound without PSTN Call
+            </summary>
+            <param name="toEndPoint"></param>
+            <param name="fromNumber"></param>
+            <param name="ncco"></param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.Endpoint">
+            <summary>
+            Connect to a single endpoint.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.From">
+            <summary>
+            A number in E.164 format that identifies the caller.
+            This must be one of your Vonage virtual numbers, 
+            another value will result in the caller ID being unknown.
+            If the caller is an app user, this option should be omitted.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.EventType">
+            <summary>
+            Set to synchronous to:
+            make the connect action synchronous
+            enable eventUrl to return an NCCO that overrides the current NCCO when a call moves to specific states.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.Timeout">
+            <summary>
+            If the call is unanswered, set the number in seconds before Vonage stops ringing endpoint. The default value is 60.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.Limit">
+            <summary>
+            Maximum length of the call in seconds. The default and maximum value is 7200 seconds (2 hours).
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.MachineDetection">
+            <summary>
+            Configure the behavior when Vonage detects that a destination is an answerphone. Set to either:
+            continue - Vonage sends an HTTP request to event_url with the Call event machine
+            hangup - end the Call
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.EventUrl">
+            <summary>
+            Set the webhook endpoint that Vonage calls asynchronously on each of the possible Call States. 
+            If eventType is set to synchronous the eventUrl can return an NCCO that overrides the current 
+            NCCO when a timeout occurs.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.EventMethod">
+            <summary>
+            The HTTP method Vonage uses to make the request to eventUrl. The default value is POST.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConnectAction.RingbackTone">
+            <summary>
+            A URL value that points to a ringbackTone to be played back on repeat to the caller, 
+            so they don't hear silence. The ringbackTone will automatically stop playing when the call is 
+            fully connected. It's not recommended to use this parameter when connecting to a phone endpoint, 
+            as the carrier will supply their own ringbackTone. 
+            Example: "ringbackTone": "http://example.com/ringbackTone.wav".
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.Name">
+            <summary>
+            The name of the Conversation room. Names are namespaced to the application level.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.MusicOnHoldUrl">
+            <summary>
+            A URL to the mp3 file to stream to participants until the conversation starts. 
+            By default the conversation starts when the first person calls the virtual number 
+            associated with your Voice app. To stream this mp3 before the moderator joins the 
+            conversation, set startOnEnter to false for all users other than the moderator.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.StartOnEnter">
+            <summary>
+            The default value of true ensures that the conversation starts when this caller 
+            joins conversation name. Set to false for attendees in a moderated conversation.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.EndOnExit">
+            <summary>
+            Specifies whether a moderated conversation ends when the moderator hangs up. 
+            This is set to false by default, which means that the conversation only ends 
+            when the last remaining participant hangs up, regardless of whether the moderator 
+            is still on the call. Set endOnExit to true to terminate the conversation when the 
+            moderator hangs up.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.Record">
+            <summary>
+            Set to true to record this conversation. For standard conversations, 
+            recordings start when one or more attendees connects to the conversation. 
+            For moderated conversations, recordings start when the moderator joins. 
+            That is, when an NCCO is executed for the named conversation where startOnEnter is set 
+            to true. When the recording is terminated, the URL you download the recording 
+            from is sent to the event URL. By default audio is recorded in MP3 format.
+            See the recording guide for more details
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.EventUrl">
+            <summary>
+            Url to receive webhooks at for the conversation
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.EventMethod">
+            <summary>
+            Method to use on the webhooks for the conversation
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.CanSpeak">
+            <summary>
+            A list of leg UUIDs that this participant can be heard by. 
+            If not provided, the participant can be heard by everyone. 
+            If an empty list is provided, the participant will not be heard by anyone
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.ConversationAction.CanHear">
+            <summary>
+            A list of leg UUIDs that this participant can hear. 
+            If not provided, the participant can hear everyone. 
+            If an empty list is provided, the participant will not hear any other participants
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.AppEndpoint.User">
+            <summary>
+            	the username of the user to connect to. This username must have been added as a user
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.Endpoint.Type">
+            <summary>
+            the type of endpoint being connected
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.PhoneEndpoint.Number">
+            <summary>
+            The phone number to connect to in E.164 format.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.PhoneEndpoint.DtmfAnswer">
+            <summary>
+            Set the digits that are sent to the user as soon as the Call is answered. 
+            The * and # digits are respected. You create pauses using p. Each pause is 500ms.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.PhoneEndpoint.OnAnswer">
+            <summary>
+            An object containing a required url key. 
+            The URL serves an NCCO to execute in the number being connected to, 
+            before that call is joined to your existing conversation. 
+            Optionally, the ringbackTone key can be specified with a URL value that points to a 
+            ringbackTone to be played back on repeat to the caller, so they do not hear just silence. 
+            The ringbackTone will automatically stop playing when the call is fully connected. 
+            Example: {"url":"https://example.com/answer", "ringbackTone":"http://example.com/ringbackTone.wav" }.
+            Please note, the key ringback is still supported.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.SipEndpoint.Uri">
+            <summary>
+            the SIP URI to the endpoint you are connecting to in the format sip:rebekka@sip.example.com.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.SipEndpoint.Headers">
+            <summary>
+            key => value string pairs containing any metadata you need 
+            e.g. { "location": "New York City", "occupation": "developer" }
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.VbcEndpoint.Extension">
+            <summary>
+            the VBC extension to connect the call to.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.WebsocketEndpoint.Uri">
+            <summary>
+            the URI to the websocket you are streaming to.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.WebsocketEndpoint.ContentType">
+            <summary>
+            the internet media type for the audio you are streaming. Possible values are: audio/l16;rate=16000 or audio/l16;rate=8000.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.Endpoints.WebsocketEndpoint.Headers">
+            <summary>
+            an object containing any metadata you want. See connecting to a websocket for example headers
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.MultiInputAction.EventUrl">
+            <summary>
+            Vonage sends the digits pressed by the callee to this URL 1) after timeOut pause in activity or when # is pressed for DTMF or 2) after user stops speaking or 30 seconds of speech for speech input.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.MultiInputAction.EventMethod">
+            <summary>
+            The HTTP method used to send event information to event_url The default value is POST.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.MultiInputAction.Dtmf">
+            <summary>
+            DTMF settings. Should be specified to enable DTMF input. If all the DTMF input settings will have default values, it should be specified as empty object
+            NOTE: this is serialized as an empty object if not initalized by the user
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.MultiInputAction.Type">
+            <summary>
+            Acceptable input type. Can be set as [ "dtmf" ] for DTMF input only, [ "speech" ] for ASR only, or [ "dtmf", "speech" ] for both.
+            Is required.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.MultiInputAction.Speech">
+            <summary>
+            Speech recognition settings. Should be specified to enable speech input.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.NotifyAction.Payload">
+            <summary>
+            The JSON object body to send to your event URL
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.NotifyAction.EventUrl">
+            <summary>
+            The URL to send events to. If you return an NCCO when you receive a notification, it will replace the current NCCO
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.NotifyAction.EventMethod">
+            <summary>
+            The HTTP method to use when sending payload to your eventUrl
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.Format">
+            <summary>
+            Record the Call in a specific format.
+            The default value is mp3, or wav when recording more than 2 channels.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.Split">
+            <summary>
+            Record the sent and received audio in separate channels of a stereo 
+            recording—set to conversation to enable this.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.Channels">
+            <summary>
+            The number of channels to record (maximum 32). 
+            If the number of participants exceeds channels any additional participants 
+            will be added to the last channel in file. split conversation must also be enabled
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.EndOnSilence">
+            <summary>
+            Stop recording after n seconds of silence. 
+            Once the recording is stopped the recording data is sent to event_url. 
+            The range of possible values is 3&lt;=endOnSilence&lt;=10.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.EndOnKey">
+            <summary>
+            Stop recording when a digit is pressed on the handset. Possible values are: *, # or any single digit e.g. 9
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.TimeOut">
+            <summary>
+            The maximum length of a recording in seconds. One the recording is stopped the recording 
+            data is sent to event_url. The range of possible values 
+            is between 3 seconds and 7200 seconds (2 hours)
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.BeepStart">
+            <summary>
+            Set to true to play a beep when a recording starts
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.EventUrl">
+            <summary>
+            The URL to the webhook endpoint that is called asynchronously when a recording is finished. 
+            If the message recording is hosted by Vonage, this webhook contains the URL you need to download 
+            the recording and other meta data.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.RecordAction.EventMethod">
+            <summary>
+            The HTTP method used to make the request to eventUrl. The default value is POST.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.SpeechSettings.Uuid">
+            <summary>
+            The unique ID of the Call leg for the user to capture the speech of.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.SpeechSettings.EndOnSilence">
+            <summary>
+            Controls how long the system will wait after user stops speaking to decide the input is completed. The default value is 2 (seconds). The range of possible values is between 1 second and 10 seconds.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.SpeechSettings.Language">
+            <summary>
+            Expected language of the user's speech. Format: BCP-47. Default: en-US see list of supported languages: https://developer.nexmo.com/voice/voice-api/guides/asr#language
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.SpeechSettings.Context">
+            <summary>
+            Array of hints (strings) to improve recognition quality if certain words are expected from the user.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.SpeechSettings.StartTimeout">
+            <summary>
+            Controls how long the system will wait for the user to start speaking. The range of possible values is between 1 second and 10 seconds.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.SpeechSettings.MaxDuration">
+            <summary>
+            Controls maximum speech duration (from the moment user starts speaking). The default value is 60 (seconds). The range of possible values is between 1 and 60 seconds.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.StreamAction.StreamUrl">
+            <summary>
+            An array containing a single URL to an mp3 or wav (16-bit) audio file 
+            to stream to the Call or Conversation.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.StreamAction.Level">
+            <summary>
+            Set the audio level of the stream in the range -1 &gt;=level&lt;=1 with a precision of 0.1. The default value is 0.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.StreamAction.BargeIn">
+            <summary>
+            Set to true so this action is terminated when the user presses a button on the keypad. 
+            Use this feature to enable users to choose an option without having to listen to the whole message 
+            in your Interactive Voice Response (IVR ). If you set bargeIn to true on one more Stream actions then 
+            the next non-stream action in the NCCO stack must be an input action. The default value is false.
+            Once bargeIn is set to true it will stay true (even if bargeIn: false is set in a following action) 
+            until an input action is encountered
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.StreamAction.Loop">
+            <summary>
+            The number of times audio is repeated before the Call is closed. The default value is 1. Set to 0 to loop infinitely.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.TalkAction.Text">
+            <summary>
+            A string of up to 1,500 characters (excluding SSML tags) containing the message to be 
+            synthesized in the Call or Conversation. A single comma in text adds a short pause to the 
+            synthesized speech. To add a longer pause a break tag needs to be used in SSML. 
+            To use SSML tags, you must enclose the text in a speak element.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.TalkAction.BargeIn">
+            <summary>
+            Set to true so this action is terminated when the user presses a button on the keypad. 
+            Use this feature to enable users to choose an option without having to listen to the whole message 
+            in your Interactive Voice Response (IVR ). If you set bargeIn to true on one more Stream actions then 
+            the next non-stream action in the NCCO stack must be an input action. The default value is false.
+            Once bargeIn is set to true it will stay true (even if bargeIn: false is set in a following action) 
+            until an input action is encountered
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.TalkAction.Loop">
+            <summary>
+            The number of times text is repeated before the Call is closed. The default value is 1. Set to 0 to loop infinitely.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.TalkAction.Level">
+            <summary>
+            The volume level that the speech is played. This can be any value between -1 to 1 with 0 being the default.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.TalkAction.VoiceName">
+            <summary>
+            The name of the voice used to deliver text. You use the voiceName that has the correct language, 
+            gender and accent for the message you are sending. 
+            For example, the default voice kimberly is a female who speaks English with an 
+            American accent (en-US). Possible values are listed in the Text-To-Speech guide.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.TalkAction.Language">
+            <summary>
+            The language (<see href="https://tools.ietf.org/html/bcp47">BCP-47</see>format) for the message you are sending. Default: en-US. Possible values are listed in the <see href="https://developer.nexmo.com/voice/voice-api/guides/text-to-speech#supported-languages">Text-To-Speech guide</see>.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.Nccos.TalkAction.Style">
+            <summary>
+            The vocal style (vocal range, tessitura and timbre). Default: 0. Possible values are listed in the <see href="https://developer.nexmo.com/voice/voice-api/guides/text-to-speech#supported-languages">Text-To-Speech guide</see>.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.StreamCommand.StreamUrl">
+            <summary>
+            An array of URLs pointing to the .mp3 or .wav audio file to stream.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.StreamCommand.Loop">
+            <summary>
+            Set to 0 to replay the audio file at stream_url when the stream ends.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.StreamCommand.Level">
+            <summary>
+            Set the audio level of the stream in the range -1 &gt;= level &lt;= 1 with a precision of 0.1. The default value is 0.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.TalkCommand.Text">
+            <summary>
+            A UTF-8 and URL encoded string of up to 1500 characters containing
+            the message to be synthesized in the Call or Conversation. Each
+            comma in text adds a short pause to the synthesized speech.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.TalkCommand.VoiceName">
+            <summary>
+            The name of the voice used to deliver text. You use the voice_name
+            that has the correct language, gender and accent for the message
+            you are sending. For example, the default voice kimberley is a
+            female who speaks English with an American accent (en-US).
+            Possible values for voice_name are listed at https://docs.nexmo.com/voice/voice-api/api-reference#talk_put
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.TalkCommand.Loop">
+            <summary>
+            Set to 0 to replay the audio file at stream_url when the stream ends. The default value is 1.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.TalkCommand.Level">
+            <summary>
+            The volume level that the speech is played. This can be any value between -1 to 1 in 0.1 increments, with 0 being the default.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.TalkCommand.Language">
+            <summary>
+            The language (<see href="https://tools.ietf.org/html/bcp47">BCP-47</see>format) for the message you are sending. Default: en-US. Possible values are listed in the <see href="https://developer.nexmo.com/voice/voice-api/guides/text-to-speech#supported-languages">Text-To-Speech guide</see>.
+            </summary>
+        </member>
+        <member name="P:Vonage.Voice.TalkCommand.Style">
+            <summary>
+            The vocal style (vocal range, tessitura and timbre). Default: 0. Possible values are listed in the <see href="https://developer.nexmo.com/voice/voice-api/guides/text-to-speech#supported-languages">Text-To-Speech guide</see>.
+            </summary>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.CreateCallAsync(Vonage.Voice.CallCommand,Vonage.Request.Credentials)">
+            <summary>
+            POST /v1/calls - create an outbound SIP or PSTN Call
+            </summary>
+            <param name="command"></param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <returns></returns>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.GetCallsAsync(Vonage.Voice.CallSearchFilter,Vonage.Request.Credentials)">
+            <summary>
+            GET /v1/calls - retrieve information about all your Calls
+            <param name="filter">Filter to search calls on</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            </summary>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.GetCallAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            GET /v1/calls/{uuid} - retrieve information about a single Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.UpdateCallAsync(System.String,Vonage.Voice.CallEditCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid} - modify an existing Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.StartStreamAsync(System.String,Vonage.Voice.StreamCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/stream - stream an audio file to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.StopStreamAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            DELETE /v1/calls/{uuid}/stream - stop streaming an audio file to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.StartTalkAsync(System.String,Vonage.Voice.TalkCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/talk - send a synthesized speech message to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.StopTalkAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            DELETE /v1/calls/{uuid}/talk - stop sending a synthesized speech message to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.StartDtmfAsync(System.String,Vonage.Voice.DtmfCommand,Vonage.Request.Credentials)">
+            <summary>
+            PUT /v1/calls/{uuid}/dtmf - send Dual-tone multi-frequency(DTMF) tones to an active Call
+            </summary>
+            <param name="id">id of call</param>
+            <param name="cmd">Command to execute against call</param>
+            <param name="creds">(Optional) Overridden credentials for only this request</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.GetRecordingAsync(System.String,Vonage.Request.Credentials)">
+            <summary>
+            GET - retrieves the recording from a call based off of the input url
+            </summary>
+            <param name="recordingUrl">Url where the recorded call lives</param>
+            <param name="creds">Overridden credentials</param>
+            <exception cref="T:Vonage.Request.VonageHttpRequestException">thrown if an error is encountered when talking to the API</exception>
+            <returns>A response containing a byte array representing the file stream</returns>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.CreateCallAsync(System.String,System.String,Vonage.Voice.Nccos.Ncco)">
+            <summary>
+            POST /v1/calls - create an outbound SIP or PSTN Call
+            </summary>
+            <param name="toNumber"></param>
+            <param name="fromNumber"></param>
+            <param name="ncco"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vonage.Voice.VoiceClient.CreateCallAsync(Vonage.Voice.Nccos.Endpoints.Endpoint,System.String,Vonage.Voice.Nccos.Ncco)">
+            <summary>
+            POST /v1/calls - create an outbound SIP or PSTN Call
+            </summary>
+            <param name="toEndPoint"></param>
+            <param name="fromNumber"></param>
+            <param name="ncco"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
